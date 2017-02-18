@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.10.00" ExportDate="2017-02-18T15:45:20.4513641+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.10.00" ExportDate="2017-02-18T15:47:38.6822734+01:00">
   <Header>
     <App Guid="e96af4d0-ccee-45df-8fa2-0159cfcb267a" />
     <Language Default="en-US" />
@@ -157,12 +157,15 @@
     <Entity AssignmentObjectType="App" AttributeSetStaticName="2SexyContent-App" AttributeSetName="2SexyContent-App" EntityGUID="cc452f6d-1635-403f-82d9-d3d9d5230e83" KeyNumber="324">
       <Value Key="DisplayName" Value="Tutorial - JavaScript - using the REST API" Type="String" />
       <Value Key="Description" Value="" Type="String" />
-      <Value Key="Version" Value="01.02.00" Type="String" />
+      <Value Key="Version" Value="08.10.00" Type="String" />
       <Value Key="Folder" Value="Tutorial - JavaScript - using the REST API" Type="String" />
       <Value Key="AllowTokenTemplates" Value="True" Type="Boolean" />
       <Value Key="AllowRazorTemplates" Value="False" Type="Boolean" />
       <Value Key="Hidden" Value="False" Type="Boolean" />
       <Value Key="OriginalId" Value="e96af4d0-ccee-45df-8fa2-0159cfcb267a" Type="String" />
+      <Value Key="RequiredVersion" Value="08.03.00" Type="String" />
+      <Value Key="RequiredDnnVersion" Value="07.02.00" Type="String" />
+      <Value Key="SupportsAjaxReload" Value="False" Type="Boolean" />
     </Entity>
     <Entity AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="a1f9d03d-6d76-46fa-9dd0-af474daf3e41" KeyNumber="324" />
     <Entity AssignmentObjectType="App" AttributeSetStaticName="App-Resources" AttributeSetName="App-Resources" EntityGUID="505dbd05-d5f2-411e-8760-654ec39d4c95" KeyNumber="324">

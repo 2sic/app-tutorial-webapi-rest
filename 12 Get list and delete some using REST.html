@@ -16,13 +16,8 @@
 <script>
 
 function getAllFeedback(moduleId) {
-    var moduleSxc = $2sxc(moduleId);
-    var dnnSf = $.ServicesFramework(moduleId);
-
-    $.ajax({
-        url: moduleSxc.resolveServiceUrl('app-content/Feedback'),
-        beforeSend:  dnnSf.setModuleHeaders,
-        success: function(data) {
+    $2sxc(moduleId).webApi.get('app/auto/content/Feedback')
+        .then(function(data) {
             // use the data to show a message
             $('#message').html("Success, the $.ajax(...) worked! I found " + data.length + " feedback items, the first one is '" + data[0].Title + "'");
         
@@ -34,33 +29,20 @@ function getAllFeedback(moduleId) {
             $('#categories').empty();
             $(items.join("")).appendTo($('#categories'));
 
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert("Error:" + errorThrown);
-        }
-    });
+        });
 };
 
 function deleteFeedback(moduleId, feedbackId) {
     if(!confirm('are you sure?'))
         return;
-    var moduleSxc = $2sxc(moduleId);
-    var dnnSf = $.ServicesFramework(moduleId);
 
-    $.ajax({
-        type: "Delete",
-        url: moduleSxc.resolveServiceUrl('app-content/Feedback/' + feedbackId),
-        beforeSend:  dnnSf.setModuleHeaders,
-        success: function(data) {
+    $2sxc(moduleId).webApi.delete('app/auto/content/Feedback/' + feedbackId)
+        .then(function(data) {
             // use the data to show a message
             alert("Success, the $.ajax(...) delete worked! Will now refresh the list");
 
             getAllFeedback(moduleId);
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert("Error:" + errorThrown);
-        }
-    });
+        });
 }
 
 // This call will execute the main function when the document is ready
@@ -70,4 +52,8 @@ $(function() {
 });
 </script>
 
-<script src="/DesktopModules/ToSIC_SexyContent/Js/2sxc.api.min.js"></script>
+<!-- this includes the $2sxc helpers necessary to work --> 
+<script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
+
+<!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
+<script src="[App:Path]/assets/tutorial-helpers.js"></script>
