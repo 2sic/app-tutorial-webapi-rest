@@ -1,0 +1,54 @@
+<h2>Simple get content-items list with REST</h2>
+<p>
+    The following demo shows how to use simple JavaScript to retrieve all Feedback items in this app.
+</p>
+<p>
+    This uses jQuery to do the ajax and will add the returned items to the ol-tags. 
+</p>
+<p>
+    Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the content-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
+</p>
+<h2>These is where the categories will appear</h2>
+<div id="message"></div>
+<ol id="categories">
+</ol>
+
+<script>
+
+function getAllFeedbackCategories(moduleId) {
+    // the following line gets a helper object for this module. Note that the placeholder Module:ModuleId will be turned into the module number on the server
+    var moduleSxc = $2sxc(moduleId);
+    var dnnSf = $.ServicesFramework(moduleId);
+
+    // Here we ask the helper system for the full url to the REST
+    var urlToAllItems = moduleSxc.resolveServiceUrl('app-content/Feedback Category');
+
+    $.ajax({
+        url: urlToAllItems,
+        beforeSend:  dnnSf.setModuleHeaders,
+        success: function(data) {
+            // use the data to show a message
+            $('#message').html("Success, the $.ajax(...) worked! I found " + data.length + " categories, the first one is '" + data[0].Title + "'");
+        
+            // use the data to show a list of items
+            var items = [];
+            $.each(data, function(idx, category) {
+                items.push( "<li>" + category.Title + "</li>" );
+            });
+            $(items.join("")).appendTo($('#categories'));
+
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            alert("Error:" + errorThrown);
+        }
+    });
+};
+
+// This call will execute the main function when the document is ready
+// Don't try to execute it before, because the security features won't work yet
+$(function() { 
+    getAllFeedbackCategories([Module:ModuleId]) 
+});
+</script>
+
+<script src="/DesktopModules/ToSIC_SexyContent/Js/2sxc.api.min.js"></script>
