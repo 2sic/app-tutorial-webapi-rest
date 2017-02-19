@@ -12,6 +12,9 @@
 <div id="message"></div>
 <ol id="categories">
 </ol>
+<div>
+    <a href="javascript:createFeedback(@Dnn.Module.ModuleID);">Click here to create the new item.</a>
+</div>
 
 <script>
 
@@ -45,10 +48,33 @@ function deleteFeedback(moduleId, feedbackId) {
         });
 }
 
+
+
+function showSuccess (data) {
+    // use the data to show a message
+    $('#message').html("I just created a new item in the content-database. I'm not showing it here to keep the code very simple - this could be a thank-you message after a contact form.");
+
+}
+
+
+function createFeedback(moduleId) {
+    // new object to create - with date/time stamp
+    var newItem = {
+        Subject: "New feedback from " + (new Date()).toISOString(),
+        Message: "I love REST"
+    }
+
+    $2sxc(moduleId).webApi.post('app/auto/content/Feedback', {}, newItem)
+        .then(function(data){
+            showSuccess(data);
+            getAllFeedback(moduleId);
+        });
+};
+
 // This call will execute the main function when the document is ready
 // Don't try to execute it before, because the security features won't work yet
 $(function() { 
-    getAllFeedback([Module:ModuleId]) 
+    getAllFeedback(@Dnn.Module.ModuleID) 
 });
 </script>
 
@@ -56,4 +82,4 @@ $(function() {
 <script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
 
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
-<script src="[App:Path]/assets/tutorial-helpers.js"></script>
+<script src="@App.Path/assets/tutorial-helpers.js"></script>

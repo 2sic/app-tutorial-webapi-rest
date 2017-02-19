@@ -19,24 +19,26 @@
 function getSortedCategories(moduleId) {
     // the following line gets a helper object for this module. Note that the placeholder Module:ModuleId will be turned into the module number on the server
     $2sxc(moduleId).webApi.get('app/auto/query/Sorted Categories')
-        .then(function(data) {
-            // use the data to show a message
-            $('#message').html("Success, the $.ajax(...) worked! I found " + data.Default.length + " categories, the first one is '" + data.Default[0].Title + "'");
-        
-            // use the data to show a list of items
-            var items = [];
-            $.each(data.Default, function(idx, category) {
-                items.push( "<li>" + category.Title + "</li>" );
-            });
-            $(items.join("")).appendTo($('#categories'));
-
-        });
+        .then(handleResult);
 };
+
+function handleResult(data) {
+    // use the data to show a message
+    $('#message').html("Success, the $.ajax(...) worked! I found " + data.Default.length + " categories, the first one is '" + data.Default[0].Title + "'");
+
+    // use the data to show a list of items
+    var items = [];
+    $.each(data.Default, function(idx, category) {
+        items.push( "<li>" + category.Title + "</li>" );
+    });
+    $(items.join("")).appendTo($('#categories'));
+
+}
 
 // This call will execute the main function when the document is ready
 // Don't try to execute it before, because the security features won't work yet
 $(function() { 
-    getSortedCategories([Module:ModuleId]) 
+    getSortedCategories(@Dnn.Module.ModuleID) 
 });
 </script>
 
@@ -44,4 +46,4 @@ $(function() {
 <script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
 
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
-<script src="[App:Path]/assets/tutorial-helpers.js"></script>
+<script src="@App.Path/assets/tutorial-helpers.js"></script>
