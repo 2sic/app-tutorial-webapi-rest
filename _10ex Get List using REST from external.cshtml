@@ -1,13 +1,23 @@
-<h2>Simple get content-items list with REST</h2>
+<h2>Get content-items list with REST from outside 2sxc</h2>
 <p>
-    The following demo shows how to use simple JavaScript to retrieve all Feedback items in this app.
-</p>
-<p>
-    This uses jQuery to do the ajax and will add the returned items to the ol-tags. 
+    This demo retrieves the list, but assumes you're not inside a 2sxc-module. There are a few differences:
+    <ol>
+        <li>no $2sxc used </li>
+        <li>the app-name is not "auto" but "Tut-JS-REST", as it can't auto-detect the app</li>
+        <li>note that this requires the settings to allow anonymous access</li>
+    </ol>
 </p>
 <p>
     Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the content-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
 </p>
+<p>Press the following link to execute the script. Important: this example assumes that it's not running inside DNN, so the root API-path (the portal-root) would have to be manually specified. Because an external call couldn't ask any API about this, it would have to know the url endpoint. 
+    <br>
+    Portal root path: <input id="testValueForPortalRoot" type="text" value="@Dnn.Portal.PortalAlias.HTTPAlias"> 
+    <br>
+    <input type="button" value="Press to run" onclick="getAllFeedbackCategoriesPublic()">
+
+</p>
+
 <h2>These is where the categories will appear</h2>
 <div id="message"></div>
 <ol id="categories">
@@ -29,22 +39,10 @@ function handleResult(data) {
 
 }
 
-// this is the easiest way to get data from inside a dnn-module
-function getAllFeedbackCategoriesEasyWay(moduleId) {
-    $2sxc(moduleId).webApi.get('app/auto/content/Feedback Category')
-        .then(handleResult);
-};
-
-function getAllFeedbackCategoriesHardWay(moduleId) {
-    // the following line gets a helper object for this module. 
-    var modSxc = $2sxc(moduleId);
-
+function getAllFeedbackCategoriesPublic() {
     // this is the manual setup using $.ajax
-    var urlToAllItems = modSxc.resolveServiceUrl('app/auto/content/Feedback Category')    
-    var dnnSf = $.ServicesFramework(moduleId);
     $.ajax({
-        url: urlToAllItems,
-        beforeSend:  dnnSf.setModuleHeaders,
+        url: "//" + $('#testValueForPortalRoot').val() + '/DesktopModules/2sxc/API/app/Tut-JS-REST/content/Feedback Category',
         success: handleResult,
         error: function(jqXHR, textStatus, errorThrown){
             alert("Error:" + errorThrown);
@@ -55,10 +53,9 @@ function getAllFeedbackCategoriesHardWay(moduleId) {
 
 
 // This call will execute the main function when the document is ready
-// Don't try to execute it before, because the DNN security features won't work yet
-// Note that the placeholder Module:ModuleId will be turned into the module number on the server, so the browser will actually have a number
 $(function() { 
-    getAllFeedbackCategoriesEasyWay([Module:ModuleId]) 
+    // just a demo, so commented out
+    // getAllFeedbackCategoriesPublic() 
 });
 </script>
 
@@ -66,4 +63,4 @@ $(function() {
 <script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
 
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
-<script src="[App:Path]/assets/tutorial-helpers.js"></script>
+<script src="@App.Path/assets/tutorial-helpers.js"></script>
