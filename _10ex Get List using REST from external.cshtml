@@ -10,10 +10,7 @@
 <p>
     Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the content-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
 </p>
-<p>Press the following link to execute the script. Important: this example assumes that it's not running inside DNN, so the root API-path (the portal-root) would have to be manually specified. Because an external call couldn't ask any API about this, it would have to know the url endpoint. 
-    <br>
-    Portal root path: <input id="testValueForPortalRoot" type="text" value="@Dnn.Portal.PortalAlias.HTTPAlias"> 
-    <br>
+<p>Press the following link to execute the script. 
     <input type="button" value="Press to run" onclick="getAllFeedbackCategoriesPublic()">
 
 </p>
@@ -22,6 +19,8 @@
 <div id="message"></div>
 <ol id="categories">
 </ol>
+
+
 
 <script>
 
@@ -42,7 +41,7 @@ function handleResult(data) {
 function getAllFeedbackCategoriesPublic() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: "//" + $('#testValueForPortalRoot').val() + '/desktopmodules/2sxc/api/app/Tut-JS-REST/content/Feedback Category',
+        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/content/Feedback Category',
         success: handleResult,
         error: alertAboutError
     });
@@ -62,3 +61,5 @@ $(function() {
 
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
 <script src="@App.Path/assets/tutorial-helpers.js"></script>
+
+@RenderPage("_helper endpoint.cshtml")

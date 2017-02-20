@@ -22,7 +22,7 @@
 function getSortedCategoriesPublic() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: "//" + $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
+        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
         success: handleResult,
         error: alertAboutError
     });
