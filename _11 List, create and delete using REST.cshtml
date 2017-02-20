@@ -2,12 +2,7 @@
 <p>
     The following demo shows how to use simple JavaScript to retrieve all Feedback items in this app. It will also offer a delete-button to delete again. 
 </p>
-<p>
-    This uses jQuery to do the ajax and will add the returned items to the ol-tags. 
-</p>
-<p>
-    Note that it works for admins by default. The permissions have not been opened, so it wouldn't work for non-admins. To make it work for visitors you have to allow read-permissions (to get the list) and delete permissions (to delete) for anonymous users (or users with view permissions). This is configured on the content-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
-</p>
+
 <h2>These is where the feedback items with delete will appear</h2>
 <div id="message"></div>
 <ol id="categories">
@@ -42,8 +37,6 @@ function deleteFeedback(moduleId, feedbackId) {
     $2sxc(moduleId).webApi.delete('app/auto/content/Feedback/' + feedbackId)
         .then(function(data) {
             // use the data to show a message
-            alert("Success, the $.ajax(...) delete worked! Will now refresh the list");
-
             getAllFeedback(moduleId);
         });
 }

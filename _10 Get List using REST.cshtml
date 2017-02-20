@@ -2,12 +2,7 @@
 <p>
     The following demo shows how to use simple JavaScript to retrieve all Feedback items in this app.
 </p>
-<p>
-    This uses jQuery to do the ajax and will add the returned items to the ol-tags. 
-</p>
-<p>
-    Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the content-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
-</p>
+
 <h2>These is where the categories will appear</h2>
 <div id="message"></div>
 <ol id="categories">
@@ -31,7 +26,7 @@ function handleResult(data) {
 
 // this is the easiest way to get data from inside a dnn-module
 function getAllFeedbackCategoriesEasyWay(moduleId) {
-    $2sxc(moduleId).webApi.get('app/auto/content/Feedback Category')
+    $2sxc(moduleId).webApi.get('app/auto/content/Category')
         .then(handleResult);
 };
 
@@ -41,7 +36,7 @@ function getAllFeedbackCategoriesHardWay(moduleId) {
     var modSxc = $2sxc(moduleId);
 
     // this is the manual setup using $.ajax
-    var urlToAllItems = modSxc.resolveServiceUrl('app/auto/content/Feedback Category')    
+    var urlToAllItems = modSxc.resolveServiceUrl('app/auto/content/Category')    
     var dnnSf = $.ServicesFramework(moduleId);
     $.ajax({
         url: urlToAllItems,

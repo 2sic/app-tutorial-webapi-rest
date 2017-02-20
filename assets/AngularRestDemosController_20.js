@@ -13,7 +13,7 @@
         var vm = this;
         vm.message = "loading";
 
-        $http.get('app/auto/content/Feedback Category').then(function (result) {
+        $http.get('app/auto/content/Category').then(function (result) {
             vm.items = result.data;
             vm.message = "Success, the $.ajax(...) worked! I found " + result.data.length 
                 + " categories, the first one is '" + result.data[0].Title + "'";
