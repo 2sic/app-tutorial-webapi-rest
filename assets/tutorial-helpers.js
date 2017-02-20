@@ -18,3 +18,8 @@ warnAbout2sxcOlderThanDemo();
 function alertAboutError(jqXHR, textStatus, errorThrown){
     alert("Error:" + errorThrown);
 }
+
+
+function clear(selector) {
+    $(selector).html("");
+}

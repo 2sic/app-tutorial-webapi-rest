@@ -24,7 +24,7 @@
 function getSortedCategoriesPublic() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
+        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/EverythingSorted',
         success: handleResult,
         error: alertAboutError
     });
@@ -33,13 +33,19 @@ function getSortedCategoriesPublic() {
 
 function handleResult(data) {
     // use the data to show a message
-    $('#message').html("Success, the $.ajax(...) worked! I found " + data.Default.length + " categories, the first one is '" + data.Default[0].Title + "'");
+    $('#message').html("Success, the $.ajax(...) worked! I found " + data.Category.length + " categories, the first one is '" + data.Category[0].Title + "'");
 
     // use the data to show a list of items
     var items = [];
-    $.each(data.Default, function(idx, category) {
-        items.push( "<li>" + category.Title + "</li>" );
+    // use the data to show a list of items
+    var items = [];
+    $.each(data.Category, function(idx, itm) {
+        items.push( "<li>Cat: " + itm.Title + "</li>" );
     });
+    $.each(data.Feedback, function(idx, itm) {
+        items.push( "<li>Feedback: " + itm.Title + "</li>" );
+    });
+
     $(items.join("")).appendTo($('#categories'));
 
 }

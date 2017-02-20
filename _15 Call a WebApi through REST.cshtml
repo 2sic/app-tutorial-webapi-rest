@@ -1,17 +1,14 @@
-<h2>Simple get content-items out of a <em>query</em> with REST</h2>
+<h2>Simple get content-items out of a <em>WebAPI</em> with REST</h2>
 <p>
-    The following demo how to call a 2sxc-query using REST - from external (where no module-context is given). There are a few differences:
-    <ol>
-        <li>no $2sxc used </li>
-        <li>the app-name is not "auto" but "Tut-JS-REST", as it can't auto-detect the app</li>
-        <li>note that this requires the settings to allow anonymous access</li>
-    </ol>
+    The following demo how to call a 2sxc-WebApi call.
 </p>
 <p>
-    Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the queries-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
-</p>
-@RenderPage("_helper endpoint.cshtml")
-
+    <input type="button" onclick="checkIsOkSimple(this)" value="click to check if ok">
+    <br>
+    <input type="button" onclick="$('#message').html('cleared')" value="clear message">
+    <br>
+    <input type="button" onclick="checkIsOkExternal(this)" value="click to check if ok - when calling outside of the module">
+    </p>
 <h2>These is where the categories will appear</h2>
 <div id="message"></div>
 <ol id="categories">
@@ -19,27 +16,21 @@
 
 <script>
 
-function getSortedCategoriesPublic() {
+function checkIsOkSimple(mod) {
+    $2sxc(mod).webApi.get("app/auto/api/Example/IsOk").then(showOkInPage);
+}
+
+function checkIsOkExternal() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
-        success: handleResult,
+        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/api/Example/IsOk',
+        success: showOkInPage,
         error: alertAboutError
     });
+}
 
-};
-
-function handleResult(data) {
-    // use the data to show a message
-    $('#message').html("Success, the $.ajax(...) worked! I found " + data.Default.length + " categories, the first one is '" + data.Default[0].Title + "'");
-
-    // use the data to show a list of items
-    var items = [];
-    $.each(data.Default, function(idx, category) {
-        items.push( "<li>" + category.Title + "</li>" );
-    });
-    $(items.join("")).appendTo($('#categories'));
-
+function showOkInPage(data) {
+    $('#message').html("server said ok = " + data);
 }
 
 
@@ -51,3 +42,4 @@ function handleResult(data) {
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
 <script src="@App.Path/assets/tutorial-helpers.js"></script>
 
+@RenderPage("_helper endpoint.cshtml")
