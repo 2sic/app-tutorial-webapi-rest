@@ -1,0 +1,18 @@
+
+
+<div style="border: 1px solid black">
+    <h4>Helper Values for this Tutorial</h4>
+    External calls which don't have DNN infos need to provide the full path to the API endpoint. This offer the values for the current system/portal (it changes a bit on sub-portals and dnn-versions). In real-life calls you would hard-wire them into your external scripts / code.
+    <br>
+    Endpoint root: <input id="apiEndPointRoot" type="text" value="">
+    <br>
+</div>
+<script>
+    // retrieve the api-root path for the current site
+    $(function(){
+        var dnnSf = $.ServicesFramework(0);
+        $("#apiEndPointRoot").val(
+            dnnSf.getServiceRoot("2sxc").toLowerCase()
+        );
+    });
+</script>

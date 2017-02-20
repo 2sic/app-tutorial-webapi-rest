@@ -42,11 +42,9 @@ function handleResult(data) {
 function getAllFeedbackCategoriesPublic() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: "//" + $('#testValueForPortalRoot').val() + '/DesktopModules/2sxc/API/app/Tut-JS-REST/content/Feedback Category',
+        url: "//" + $('#testValueForPortalRoot').val() + '/desktopmodules/2sxc/api/app/Tut-JS-REST/content/Feedback Category',
         success: handleResult,
-        error: function(jqXHR, textStatus, errorThrown){
-            alert("Error:" + errorThrown);
-        }
+        error: alertAboutError
     });
 };
 

@@ -10,22 +10,19 @@
 <p>
     Note that it works for admins by default - to make it work for visitors you have to allow read-permissions for anonymous users (or users with view permissions). This is configured on the queries-types - for more infos read <a href="http://2sxc.org/help?tag=permissions">Permissions Help</a>. 
 </p>
-<p> 
-    <input type="button" value="Press to run" onclick="getSortedCategoriesPublic()">
-</p>
+@RenderPage("_helper endpoint.cshtml")
+
 <h2>These is where the categories will appear</h2>
 <div id="message"></div>
 <ol id="categories">
 </ol>
-
-@RenderPage("_helper endpoint.cshtml")
 
 <script>
 
 function getSortedCategoriesPublic() {
     // this is the manual setup using $.ajax
     $.ajax({
-        url: $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
+        url: "//" + $('#apiEndPointRoot').val() + 'app/Tut-JS-REST/query/Sorted Categories',
         success: handleResult,
         error: alertAboutError
     });
@@ -53,3 +50,4 @@ function handleResult(data) {
 
 <!-- this script just has some tutorial-helpers, not relevant to understand the tutorial code -->
 <script src="@App.Path/assets/tutorial-helpers.js"></script>
+

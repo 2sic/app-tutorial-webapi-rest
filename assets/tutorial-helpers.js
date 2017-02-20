@@ -10,3 +10,11 @@ function warnAbout2sxcOlderThanDemo(){
 }
 
 warnAbout2sxcOlderThanDemo();
+
+
+// standard error handling
+// this is just a standard "show ajax error"
+// we put it here to simplify the in-page code 
+function alertAboutError(jqXHR, textStatus, errorThrown){
+    alert("Error:" + errorThrown);
+}
