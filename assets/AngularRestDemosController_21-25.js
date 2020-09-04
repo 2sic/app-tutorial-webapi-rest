@@ -51,12 +51,10 @@
         var vm = this;
         vm.message = "loading";
 
-        $http.get('app-query/Sorted Categories').then(function (result) {
+        $http.get('app-query/EverythingSorted').then(function (result) {
             vm.items = result.data.Default;
-            vm.message = "Success, sorted query worked! I found " + result.data.Default.length + " categories, the first one is '" + result.data.Default[0].Title + "'";
+            vm.message = "Success, sorted query worked! I found " + result.data.Category.length + " categories, the first one is '" + result.data.Category[0].Title + "'";
         });
     };
-
-
 
 } ());
